@@ -25,12 +25,25 @@ var moreFruits = function (fruits) {
 // use _.each to traverse the number array and determine
 // which are multiples of five.
 var multiplesOfFive = function (numbers) {
-
+  var count = 0;
+  _.each(numbers, function(number) {
+    if (number % 5 === 0) {
+      count ++;
+    }
+  });
+  return count;
 };
 
 // use _.each to build an array containing only tweets belonging to a specified user.
 var getUserTweets = function(tweets, user) {
 
+  var userTweets = [];
+  _.each((tweets), function(tweet) {
+    if (tweet.user === user) {
+      userTweets.push(tweet)
+    }
+  });
+  return userTweets;
 };
 
 /*
@@ -41,23 +54,35 @@ var getUserTweets = function(tweets, user) {
 
 // use _.filter to return the fruits array with only the desired fruit.
 var onlyOneFruit = function (fruits, targetFruit) {
-
+  fruits = _.filter(fruits, function(fruit) {
+    return fruit === targetFruit;
+  });
+  return fruits;
 };
 
 // use _.filter to return the fruits array with only fruits
 // starting with the letter 'P'.
 var startsWith = function (fruits, letter) {
-
+  fruits = _.filter(fruits, function(fruit) {
+    return fruit[0] === letter;
+  });
+  return fruits;
 };
 
 // return a filtered array containing only cookie-type desserts.
 var cookiesOnly = function (desserts) {
-
+  desserts = _.filter(desserts, function(dessert) {
+    return dessert.type === 'cookie';
+  });
+  return desserts;
 };
 
 // rebuild the getUserTweets function from above with _.filter instead
 var filterUserTweets = function(tweets, user) {
-
+  tweets = _.filter(tweets, function(tweet) {
+    return tweet.user === user;
+  });
+  return tweets;
 };
 
 /*
@@ -69,15 +94,24 @@ var filterUserTweets = function(tweets, user) {
 // given an array of strings, use _.map to return a new array containing all
 // strings converted to uppercase letters.
 var upperCaseFruits = function (fruits) {
-
+  fruits = _.map(fruits, function(fruit) {
+    return fruit.toUpperCase();
+  });
+  return fruits;
 };
 
 // given an array of dessert objects, return a new array of objects
 // that have a new "glutenFree" property, with a boolean value.
 // TIP: Items that contain flour are not gluten-free.
 var glutenFree = function (desserts) {
-
+  var gF = {...desserts}
+  _.map(gF, function(dessert) {
+    !dessert.ingredients.includes('flour') ?
+    dessert.glutenFree = true : dessert.glutenFree = false;
+  });
+  return gF;
 };
+
 
 // given an array of tweet objects, return a new array of strings
 // containing only the message properties.
